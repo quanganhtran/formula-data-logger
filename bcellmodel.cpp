@@ -65,3 +65,19 @@ QVariant BCellModel::headerData(int section, Qt::Orientation orientation, int ro
     }
     return QVariant();
 }
+
+bool BCellModel::onVoltageChanged(int16_t id, int16_t voltage)
+{
+    cells[id].voltage = voltage;
+    QModelIndex cellIndex = index(id, 1);
+    emit dataChanged(cellIndex, cellIndex);
+    return true;
+}
+
+bool BCellModel::onTempChanged(int16_t id, int16_t temp)
+{
+    cells[id].temp = temp;
+    QModelIndex cellIndex = index(id, 2);
+    emit dataChanged(cellIndex, cellIndex);
+    return true;
+}

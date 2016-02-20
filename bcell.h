@@ -1,5 +1,6 @@
 #ifndef BCELL_H
 #define BCELL_H
+#include <cstdint>
 
 class BCell
 {

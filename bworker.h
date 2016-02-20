@@ -1,15 +1,19 @@
 #ifndef BWORKER_H
 #define BWORKER_H
+#include <QtCore>
 
-
-class BWorker
+class BWorker : public QObject
 {
+    Q_OBJECT
 public:
-    BWorker(int id0);
-    ~BWorker();
-    int id;
-    int voltage = 0;
-    int temp = 0;
+    BWorker();
+private slots:
+    void onTimeout();
+signals:
+    void updateVoltage(int16_t id, int16_t value);
+    void updateTemp(int16_t id, int16_t value);
+private:
+    QTimer timer;
 };
 
 #endif // BWORKER_H

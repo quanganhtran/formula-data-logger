@@ -15,6 +15,12 @@ public:
     QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
     QVariant headerData(int section, Qt::Orientation orientation, int role) const Q_DECL_OVERRIDE;
 
+    //    bool setData(const QModelIndex &index, const QVariant &value, int role) const Q_DECL_OVERRIDE;
+    //    bool updateCell(uint16_t id, uint16_t voltage, uint16_t temp);
+public slots:
+    bool onVoltageChanged(int16_t id, int16_t voltage);
+    bool onTempChanged(int16_t id, int16_t temp);
+
 private:
     QList<BCell> cells;
 };
