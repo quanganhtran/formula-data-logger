@@ -5,6 +5,7 @@
 #include "bcellmodel.h"
 #include "bcelltablemodel.h"
 #include "bpartialproxymodel.h"
+#include "bsortfilterproxymodel.h"
 #include "bworker.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -71,7 +72,7 @@ MainWindow::MainWindow(QThread *thread0, QWidget *parent) :
     }
     // Main model init
     BCellModel* model = new BCellModel(cells);
-    ui->tableViewMain->setModel(model);
+    //ui->tableViewMain->setModel(model);
 
     // Partial proxy init
 //    BPartialProxyModel* part1 = new BPartialProxyModel(0, this);
@@ -87,6 +88,28 @@ MainWindow::MainWindow(QThread *thread0, QWidget *parent) :
         //views[i]->setColumnWidth(0, 50);
         views[i]->setModel(model);
     }
+
+    // Sorted proxy init
+    BSortFilterProxyModel* vSorted = new BSortFilterProxyModel();
+    vSorted->setSourceModel(model);
+    vSorted->sort(1, Qt::DescendingOrder);
+    BSortFilterProxyModel* maxVoltage = new BSortFilterProxyModel(1, 0);
+    maxVoltage->setSourceModel(vSorted);
+    ui->tViewMaxVolt->setModel(maxVoltage);
+    BSortFilterProxyModel* minVoltage = new BSortFilterProxyModel(1, 143);
+    minVoltage->setSourceModel(vSorted);
+    ui->tViewMinVolt->setModel(minVoltage);
+
+
+    BSortFilterProxyModel* tSorted = new BSortFilterProxyModel();
+    tSorted->setSourceModel(model);
+    tSorted->sort(2, Qt::DescendingOrder);
+    BSortFilterProxyModel* maxTemp = new BSortFilterProxyModel(2, 0);
+    maxTemp->setSourceModel(tSorted);
+    ui->tViewMaxTemp->setModel(maxTemp);
+    BSortFilterProxyModel* minTemp = new BSortFilterProxyModel(2, 143);
+    minTemp->setSourceModel(tSorted);
+    ui->tViewMinTemp->setModel(minTemp);
 
     // Thread init
     QObject::connect(worker, SIGNAL(updateVoltage(int16_t,int16_t)), model, SLOT(onVoltageChanged(int16_t,int16_t)));

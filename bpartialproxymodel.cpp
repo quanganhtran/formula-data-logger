@@ -1,4 +1,3 @@
-#include <stdlib.h>
 #include "bpartialproxymodel.h"
 
 BPartialProxyModel::BPartialProxyModel(int part0, QObject *parent) : QSortFilterProxyModel(parent), part(part0)

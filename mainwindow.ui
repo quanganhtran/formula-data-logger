@@ -32,6 +32,9 @@
        </widget>
       </item>
       <item>
+       <widget class="QTableView" name="tableViewMain"/>
+      </item>
+      <item>
        <widget class="QPushButton" name="exitBtn">
         <property name="text">
          <string>Exit</string>
@@ -40,8 +43,17 @@
       </item>
       <item>
        <layout class="QGridLayout" name="gridLayout">
-        <item row="0" column="0">
-         <widget class="QTableView" name="tableViewMain"/>
+        <item row="1" column="0">
+         <widget class="QTableView" name="tViewMaxVolt"/>
+        </item>
+        <item row="2" column="0">
+         <widget class="QTableView" name="tViewMaxTemp"/>
+        </item>
+        <item row="2" column="1">
+         <widget class="QTableView" name="tViewMinTemp"/>
+        </item>
+        <item row="1" column="1">
+         <widget class="QTableView" name="tViewMinVolt"/>
         </item>
        </layout>
       </item>

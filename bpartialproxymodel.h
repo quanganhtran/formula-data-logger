@@ -1,6 +1,5 @@
 #ifndef BPARTIALPROXYMODEL_H
 #define BPARTIALPROXYMODEL_H
-#include <QtDebug>
 #include <QSortFilterProxyModel>
 
 class BPartialProxyModel : public QSortFilterProxyModel
