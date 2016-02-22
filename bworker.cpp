@@ -8,7 +8,7 @@ BWorker::BWorker()
 
 void BWorker::onTimeout()
 {
-    qDebug()<<"Worker::onTimeout get called from?: "<<QThread::currentThreadId();
+    //qDebug()<<"Worker::onTimeout get called from?: "<<QThread::currentThreadId();
     emit updateVoltage(2, 18);
     emit updateTemp(3, 5);
 }

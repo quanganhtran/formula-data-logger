@@ -1,8 +1,10 @@
+//#include
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "bcell.h"
 #include "bcellmodel.h"
 #include "bcelltablemodel.h"
+#include "bpartialproxymodel.h"
 #include "bworker.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -54,21 +56,39 @@ MainWindow::MainWindow(QWidget *parent) :
 }
 
 MainWindow::MainWindow(QThread *thread0, QWidget *parent) :
+    QMainWindow(parent),
     thread(new QThread),
     worker(new BWorker),
-    QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
+    // Data init
     QList<BCell> cells;
     for (int row = 0; row < 144; ++row) {
         BCell cell(row, 100 + row, 50 + row);
         cells.append(cell);
     }
+    // Main model init
     BCellModel* model = new BCellModel(cells);
     ui->tableViewMain->setModel(model);
 
+    // Partial proxy init
+//    BPartialProxyModel* part1 = new BPartialProxyModel(0, this);
+//    part1->setSourceModel(model);
+//    ui->tView1->setModel(part1);
+    QTableView* views[] = { ui->tView0, ui->tView1, ui->tView2, ui->tView3, ui->tView4, ui->tView5 };
+    for (int i = 0; i < 6; i++) {
+        BPartialProxyModel* part = new BPartialProxyModel(i, this);
+        part->setSourceModel(model);
+        //QTableView* partialView = new QTableView();
+        //partialView->setModel(part);
+        //ui->horizontalLayout->addWidget(partialView);
+        //views[i]->setColumnWidth(0, 50);
+        views[i]->setModel(model);
+    }
+
+    // Thread init
     QObject::connect(worker, SIGNAL(updateVoltage(int16_t,int16_t)), model, SLOT(onVoltageChanged(int16_t,int16_t)));
     QObject::connect(worker, SIGNAL(updateTemp(int16_t,int16_t)), model, SLOT(onTempChanged(int16_t,int16_t)));
 

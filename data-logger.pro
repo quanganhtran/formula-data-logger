@@ -17,13 +17,17 @@ SOURCES += main.cpp\
     bcellmodel.cpp \
     bcelltablemodel.cpp \
     bworker.cpp \
-    bcell.cpp
+    bcell.cpp \
+    bpartialproxymodel.cpp \
+    bsortfilterproxymodel.cpp
 
 HEADERS  += mainwindow.h \
     bcellmodel.h \
     bcelltablemodel.h \
     bworker.h \
-    bcell.h
+    bcell.h \
+    bpartialproxymodel.h \
+    bsortfilterproxymodel.h
 
 FORMS    += mainwindow.ui
 

@@ -48,7 +48,26 @@
      </layout>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout"/>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QTableView" name="tView0"/>
+      </item>
+      <item>
+       <widget class="QTableView" name="tView1"/>
+      </item>
+      <item>
+       <widget class="QTableView" name="tView2"/>
+      </item>
+      <item>
+       <widget class="QTableView" name="tView3"/>
+      </item>
+      <item>
+       <widget class="QTableView" name="tView4"/>
+      </item>
+      <item>
+       <widget class="QTableView" name="tView5"/>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
