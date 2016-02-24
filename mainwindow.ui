@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <layout class="QVBoxLayout" name="verticalLayout_2" stretch="2,8">
     <item>
      <layout class="QHBoxLayout" name="horizontalLayoutUp">
       <item>
@@ -32,10 +32,11 @@
        </widget>
       </item>
       <item>
-       <widget class="QTableView" name="tableViewMain"/>
-      </item>
-      <item>
        <widget class="QPushButton" name="exitBtn">
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(255, 0, 0);</string>
+        </property>
         <property name="text">
          <string>Exit</string>
         </property>
@@ -46,14 +47,42 @@
         <item row="1" column="0">
          <widget class="QTableView" name="tViewMaxVolt"/>
         </item>
-        <item row="2" column="0">
-         <widget class="QTableView" name="tViewMaxTemp"/>
-        </item>
-        <item row="2" column="1">
-         <widget class="QTableView" name="tViewMinTemp"/>
+        <item row="0" column="0" alignment="Qt::AlignHCenter">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Maximum Voltage</string>
+          </property>
+         </widget>
         </item>
         <item row="1" column="1">
          <widget class="QTableView" name="tViewMinVolt"/>
+        </item>
+        <item row="0" column="1" alignment="Qt::AlignHCenter">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Minimum Voltage</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1" alignment="Qt::AlignHCenter">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>Minimum Temperature</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QTableView" name="tViewMinTemp"/>
+        </item>
+        <item row="3" column="0">
+         <widget class="QTableView" name="tViewMaxTemp"/>
+        </item>
+        <item row="2" column="0" alignment="Qt::AlignHCenter">
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>Maximum Temperature</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>

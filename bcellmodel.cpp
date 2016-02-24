@@ -1,3 +1,4 @@
+#include <QBrush>
 #include "bcellmodel.h"
 
 BCellModel::BCellModel(QObject *parent) : QAbstractTableModel(parent)
@@ -39,6 +40,14 @@ QVariant BCellModel::data(const QModelIndex &index, int role) const
             return QVariant(cell.voltage);
         else if (index.column() == 2)
             return QVariant(cell.temp);
+    } else if (role == Qt::BackgroundRole) {
+        BCell cell = cells.at(index.row());
+
+        if (index.column() == 1 && cell.voltage > BCell::warningVoltage)
+            return QBrush(Qt::yellow);
+        else if (index.column() == 2 && cell.temp > BCell::warningTemperature)
+            return QBrush(Qt::yellow);
+        return QBrush();
     }
     return QVariant();
 }
@@ -51,7 +60,7 @@ QVariant BCellModel::headerData(int section, Qt::Orientation orientation, int ro
     if (orientation == Qt::Horizontal) {
         switch (section) {
         case 0:
-            return tr("Cell ID");
+            return tr("ID");
 
         case 1:
             return tr("Voltage");

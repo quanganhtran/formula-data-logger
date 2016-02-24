@@ -82,11 +82,8 @@ MainWindow::MainWindow(QThread *thread0, QWidget *parent) :
     for (int i = 0; i < 6; i++) {
         BPartialProxyModel* part = new BPartialProxyModel(i, this);
         part->setSourceModel(model);
-        //QTableView* partialView = new QTableView();
-        //partialView->setModel(part);
-        //ui->horizontalLayout->addWidget(partialView);
-        //views[i]->setColumnWidth(0, 50);
-        views[i]->setModel(model);
+        views[i]->setModel(part);
+        views[i]->resizeColumnToContents(0);
     }
 
     // Sorted proxy init
@@ -100,7 +97,6 @@ MainWindow::MainWindow(QThread *thread0, QWidget *parent) :
     minVoltage->setSourceModel(vSorted);
     ui->tViewMinVolt->setModel(minVoltage);
 
-
     BSortFilterProxyModel* tSorted = new BSortFilterProxyModel();
     tSorted->setSourceModel(model);
     tSorted->sort(2, Qt::DescendingOrder);
@@ -110,6 +106,8 @@ MainWindow::MainWindow(QThread *thread0, QWidget *parent) :
     BSortFilterProxyModel* minTemp = new BSortFilterProxyModel(2, 143);
     minTemp->setSourceModel(tSorted);
     ui->tViewMinTemp->setModel(minTemp);
+
+    //ui->tViewMaxTemp->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum));
 
     // Thread init
     QObject::connect(worker, SIGNAL(updateVoltage(int16_t,int16_t)), model, SLOT(onVoltageChanged(int16_t,int16_t)));

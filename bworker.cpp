@@ -6,7 +6,7 @@ BWorker::BWorker()
     srand(time(NULL));
 
     connect(&timer, SIGNAL (timeout()), this, SLOT (onTimeout()));
-    timer.start(200);
+    timer.start(500);
 }
 
 void BWorker::onTimeout()
